@@ -1,0 +1,18 @@
+// This Pine Script™ code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © mahmoudos
+
+//@version=5
+indicator("EMA - Security Function, Higher TimeFrame Data", overlay = true)
+
+// Getting User Input
+resolution = input.timeframe(title = "EMA Timeframe", defval = "D")
+emaLen = input.int(title = "EMA Lengh", defval = 50)
+emaColor = input.bool(title = "EMA Color? ", defval = true)
+smooth = input.bool(title = "Smooth?", defval = true)
+
+ema = ta.ema(close, emaLen)
+
+emaSmooth = request.security(symbol = syminfo.tickerid, timeframe = resolution, expression = ema, gaps = barmerge.gaps_on, lookahead = barmerge.lookahead_off)
+emaStep = request.security(symbol = syminfo.tickerid, timeframe = resolution, expression = ema, gaps = barmerge.gaps_off, lookahead = barmerge.lookahead_off)
+
+plot(series = smooth ? emaSmooth : emaStep, title = "EMA Higher Timeframe", color = emaColor ? close > emaStep ? color.green : color.red : color.blue, linewidth = 3)
