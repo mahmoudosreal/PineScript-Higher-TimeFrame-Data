@@ -50,8 +50,8 @@ smooth = input.bool(title = "Smooth?", defval = true)
 ema = ta.ema(close, emaLen)
 
 // Fetch EMA from higher timeframe with or without smoothing
-emaSmooth = request.security(symbol = syminfo.tickerid, timeframe = resolution, expression = ema, gaps = barmerge.gaps_on, lookahead = barmerge.lookahead_off)
-emaStep = request.security(symbol = syminfo.tickerid, timeframe = resolution, expression = ema, gaps = barmerge.gaps_off, lookahead = barmerge.lookahead_off)
+emaSmooth = request.security(symbol = syminfo.tickerid, timeframe = resolution, expression = ema[barstate.isrealtime ? 1 : 0], gaps = barmerge.gaps_on, lookahead = barmerge.lookahead_off)
+emaStep = request.security(symbol = syminfo.tickerid, timeframe = resolution, expression = ema[barstate.isrealtime ? 1 : 0], gaps = barmerge.gaps_off, lookahead = barmerge.lookahead_off)
 
 // Plot EMA with optional color coding
 plot(series = smooth ? emaSmooth : emaStep, title = "EMA Higher Timeframe", color = emaColor ? close > emaStep ? color.green : color.red : color.blue, linewidth = 3)
