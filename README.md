@@ -1,9 +1,4 @@
 # PineScript-Higher-TimeFrame-Data
-The Pine Script provided defines an indicator for displaying an Exponential Moving Average (EMA) from a higher timeframe on the current chart
-
-Here's a markdown formatted version of the two responses, ideal for documentation or presentation:
-
----
 
 ### Detailed Explanation of Pine Script Code
 
